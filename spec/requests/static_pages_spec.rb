@@ -4,14 +4,14 @@ describe "StaticPages" do
   
 	describe "Home page" do 
 		it "should have the content '矢上祭出展管理システム'" do 
-			visit '/static_pages/home'
+			visit root_path
 			expect(page).to have_content('矢上祭出展管理システム')
 		end
 	end
 
 	describe "About page" do 
 		it "should have the content '当システムについて'" do 
-			visit '/static_pages/about'
+			visit about_path
 			expect(page).to have_content('当システムについて')
 		end
 	end
