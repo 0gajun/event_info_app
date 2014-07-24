@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
 					uniqueness: { case_sensitive: false } )
 	validates(:userid, presence: true)
 	validates(:group, presence: true)
+
+	has_secure_password
 end

@@ -5,6 +5,8 @@ describe User do
   							name: "foo bar",
   							email: "foo_bar@example.com",
   							group: "OBOG会",
+                password: "foobar",
+                password_confirmation: "foobar",
   							staff: false,
   							admin: false
   							) }
@@ -14,6 +16,8 @@ describe User do
   	it { should respond_to(:userid) }
   	it { should respond_to(:email) }
     it { should respond_to(:password_digest) }
+    it { should respond_to(:password) }
+    it { should respond_to(:password_confirmation) }
   	it { should respond_to(:group) }
   	it { should respond_to(:staff) }
   	it { should respond_to(:admin) }
@@ -34,6 +38,18 @@ describe User do
       before { @user.group = " "}
       it { expect(subject).not_to be_valid }
     end
+    describe "when password is not present" do 
+      before do 
+        @user = User.new(userid: "1", name: "foo bar", 
+                          email: "foobar@example.com",
+                          group: "test group", password: " ",
+                          password_confirmation: " ",
+                          staff: false, admin: false
+                        )
+      end
+      it { expect(subject).not_to be_valid }
+    end
+
 
     describe "when email format" do 
       describe "is invalid" do 
@@ -63,6 +79,13 @@ describe User do
         user_with_same_email = @user.dup
         user_with_same_email.email = @user.email.upcase
         user_with_same_email.save
+      end
+      it { expect(subject).not_to be_valid }
+    end
+
+    describe "when password doesn't match confirmation" do 
+      before do 
+        @user.password_confirmation = "hogehoge" 
       end
       it { expect(subject).not_to be_valid }
     end
