@@ -1,5 +1,75 @@
 @import "bootstrap";
 
+@mixin box_sizing {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
 	padding-top: 60px;
+	font-family: Verdana, "Hiragino Kaku Gothic ProN", YuGothic, Meiryo, sans-serif;
+}
+
+/* Typography */
+
+p {
+	text-align: justify;
+	word-break: normal;
+}
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+h1 {
+	font-size: 2em;
+	letter-spacing: -2px;
+	margin-bottom: 30px;
+	font-weight: normal;
+}
+
+
+/* Home */
+.signin-out {
+	width: 350px;
+	border: 5px solid $gray-lighter;
+	border-radius: 2px;
+	background-color: #fbfbfb;
+	h1 {
+		text-align: center;
+		border-bottom: 1px $gray-lighter solid;
+	}
+}
+
+/* footer */
+footer {
+	height: 30px;
+	margin-top: 45px;
+	padding-top: 5px;
+	color: $gray-light;
+	background-color: $gray-lighter;
+
+	a {
+		color: $gray;
+		&:hover {
+			color: $gray-darker;
+		}
+	}
+
+	ul {
+		float: right;
+		list-style: none;
+		li {
+			float: left;
+			margin-left: 10px;
+		}
+	}
+}
+
+/* miscellaneous */
+.debug_dump {
+	clear: both;
+	float: left;
+	width: 100%;
+	margin-top: 45px;
+	@include box_sizing;
 }
