@@ -24,9 +24,13 @@ module YfesApp
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
-    
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.encoding = "utf-8"  
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+    config.active_record.time_zone_aware_attributes = false
+    config.i18n.default_locale = :ja
+    config.i18n.locale = :ja
     # for bootsrap-sass
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
