@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update, :show]
 	before_action :correct_user, only: [:edit, :update]
+	before_action :admin_user, only: [:index, :destroy]
 
 	def new
 		@user = User.new
@@ -36,6 +37,10 @@ class UsersController < ApplicationController
 		
 	end
 
+	def destroy
+		
+	end
+
 	private 
 		def user_params
 			params.require(:user).permit(:name, :email, :group,
@@ -53,6 +58,13 @@ class UsersController < ApplicationController
 		def correct_user
 			@user = User.find(params[:id])
 			redirect_to(root_path) unless current_user?(@user)
+		end
+
+		def admin_user
+			unless current_user.admin?
+				flash[:warning] = "権限がありません"
+				redirect_to(root_path)
+			end
 		end
 
 end

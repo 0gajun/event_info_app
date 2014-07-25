@@ -7,5 +7,9 @@ FactoryGirl.define do
 		group "矢上祭実行委員会"
 		password "foobar"
 		password_confirmation "foobar"
+
+		factory :admin do 
+			admin true
+		end
 	end
 end

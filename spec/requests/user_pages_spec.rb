@@ -19,6 +19,27 @@ describe "UserPages" do
     it { expect(subject).to have_title(full_title('マイページ')) }
   end
 
+  describe "index(users list) page" do 
+    let(:non_admin_user) { FactoryGirl.create(:user) }
+    let(:admin_user) { FactoryGirl.create(:admin) }
+    describe "when non-admin-user attempt to access" do 
+      before do 
+        sign_in non_admin_user
+        visit users_path
+      end
+      it { expect(subject).to have_content('マイページ') }
+      it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
+    end
+    describe "when admin-user attempt to access" do 
+      before do 
+        sign_in admin_user
+        visit users_path
+      end
+      it { expect(subject).to have_content('ユーザ一覧') }
+      it { expect(subject).not_to have_selector('div.alert.alert-warning', text: "権限がありません") }
+    end
+  end
+
   describe "create user" do 
   	before { visit create_user_path }
   	let(:submit) { "作成" }
