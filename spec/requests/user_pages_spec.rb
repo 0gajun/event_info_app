@@ -29,7 +29,7 @@ describe "UserPages" do
   		before do 
   			fill_in "名前",				with: "矢上　二郎"
   			fill_in "メールアドレス",		with: "test@example.com"
-  			fill_in "所属団体",			with: "矢上祭実行委員会"
+  			fill_in "団体名",			with: "矢上祭実行委員会"
   			fill_in "パスワード",			with: "foobar"
   			fill_in "パスワード(確認)",	with: "foobar"
   		end

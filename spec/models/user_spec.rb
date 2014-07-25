@@ -21,6 +21,7 @@ describe User do
   	it { should respond_to(:group) }
   	it { should respond_to(:staff) }
   	it { should respond_to(:admin) }
+    it { should respond_to(:remember_token) }
 
     it { should respond_to(:authenticate) }
 
@@ -32,10 +33,10 @@ describe User do
       before { @user.email = " " }
       it { expect(subject).not_to  be_valid }
     end
-    describe "when userid is not present" do 
-      before { @user.userid = " "}
-      it { expect(subject).not_to be_valid }
-    end
+    #describe "when userid is not present" do 
+    #  before { @user.userid = " "}
+    #  it { expect(subject).not_to be_valid }
+    #end
     describe "when group is not present" do 
       before { @user.group = " "}
       it { expect(subject).not_to be_valid }
@@ -50,6 +51,10 @@ describe User do
                         )
       end
       it { expect(subject).not_to be_valid }
+    end
+    describe "remember_token" do 
+      before { @user.save }
+      it { expect(@user.remember_token).not_to be_blank }
     end
 
 
