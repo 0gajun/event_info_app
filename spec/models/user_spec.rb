@@ -22,6 +22,8 @@ describe User do
   	it { should respond_to(:staff) }
   	it { should respond_to(:admin) }
 
+    it { should respond_to(:authenticate) }
+
     describe "when name is not present" do 
       before { @user.name = " " }
       it { expect(subject).not_to be_valid }
@@ -90,4 +92,24 @@ describe User do
       it { expect(subject).not_to be_valid }
     end
 
+    describe "when a password is too short" do 
+      before { @user.password = @user.password_confirmation = "a" * 5 }
+      it { expect(subject).not_to be_valid}
+    end
+
+    describe "return value of authenticate method" do 
+      before { @user.save }
+      let(:found_user) { User.find_by(email: @user.email) }
+
+      describe " with valid password" do 
+        it { expect(subject).to eq(found_user.authenticate(@user.password)) }
+      end
+
+      describe "with invalid password" do 
+        let(:user_with_invalid_password) {found_user.authenticate("invalid") }
+        it { expect(subject).not_to eq(user_with_invalid_password )}
+        specify { expect(user_with_invalid_password).to be_false }
+      end
+
+    end
 end

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 					uniqueness: { case_sensitive: false } )
 	validates(:userid, presence: true)
 	validates(:group, presence: true)
-
+	validates(:password, length: { minimum: 6 } )
+	
 	has_secure_password
 end
