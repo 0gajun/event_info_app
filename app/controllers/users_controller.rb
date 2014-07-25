@@ -7,9 +7,24 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			redirect_to my_page_path
+			flash[:success] = "ユーザ（#{@user.name}）が作成されました"
+			redirect_to create_user_path
 		else
 			render 'new'
+		end
+	end
+
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+		@user = User.find(params[:id])
+		if @user.update_attributes(user_params)
+			flash[:success] = "ユーザ情報が更新されました"
+			redirect_to my_page_path
+		else
+			render 'edit'
 		end
 	end
 

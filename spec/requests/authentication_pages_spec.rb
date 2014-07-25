@@ -23,15 +23,27 @@ describe "AuthenticationPages" do
   	end
   	describe "with valid information" do 
   		let(:user) { FactoryGirl.create(:user) }
-  		before do 
-  			fill_in "メールアドレス",		with: user.email.upcase
-  			fill_in "パスワード",			with: user.password
-  			click_button "ログイン"
-  		end
+  		before { sign_in user }
 
   		it { expect(subject).to have_title(full_title('マイページ')) }
   		it { expect(subject).to have_link('ログアウト', href: signout_path) }
   		it { expect(subject).to have_link('マイページ', href: my_page_path) }
+  		it { expect(subject).to have_link('ユーザ情報編集', href: edit_user_path(user) ) }
+
+  		describe "followed by signout" do 
+  			before { click_link 'ログアウト' }
+  			it { expect have_content('参加者ログイン') }
+  		end
+  	end
+  end
+
+  describe "signed in user" do 
+  	let(:user) { FactoryGirl.create(:user) }
+  	before { sign_in user, no_capybara: true }
+
+  	describe " when access to root_path" do 
+  		before { get root_path }
+  		specify { expect(response).to redirect_to(my_page_path) }
   	end
   end
 end
