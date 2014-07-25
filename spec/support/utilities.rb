@@ -7,8 +7,8 @@ def sign_in(user, options={})
     	user.update_attribute(:remember_token, User.encrypt(remember_token))
   	else
     	visit root_path
-    	fill_in "メールアドレス",    with: user.email
-    	fill_in "パスワード", with: user.password
+    	fill_in "メールアドレス",  	with: user.email
+    	fill_in "パスワード",			with: user.password
     	click_button "ログイン"
   	end
 end

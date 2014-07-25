@@ -1,4 +1,4 @@
-<h2>show.html</h2>
-<div>
-	<%= @user.name %>,<%= @user.email %>
-</div>	
+<%# my_page %>
+<% provide(:title, 'マイページ') %>
+<h2>マイページ</h2>
+<%= current_user.name %>

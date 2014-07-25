@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users, only: [:new, :create, :edit, :update]
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'sessions#new'
 
-  match '/my_page',       to: 'users#index',            via: 'get'
+  match '/my_page',       to: 'users#show',            via: 'get'
   match '/about',         to: 'static_pages#about',     via: 'get'
   match '/create_user',   to: 'users#new',              via: 'get'
   match '/signout',       to: 'sessions#destroy',       via: 'delete'

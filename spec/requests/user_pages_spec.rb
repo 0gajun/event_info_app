@@ -15,6 +15,7 @@ describe "UserPages" do
       sign_in user
       visit my_page_path
     end
+    it { expect(subject).to have_content(user.name) }
     it { expect(subject).to have_title(full_title('マイページ')) }
   end
 
@@ -50,7 +51,7 @@ describe "UserPages" do
   describe "edit" do 
     let(:user) { FactoryGirl.create(:user) }
     before do 
-     sign_in(user)
+     sign_in user
      visit edit_user_path(user)
     end
     describe "page" do 

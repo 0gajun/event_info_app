@@ -46,4 +46,60 @@ describe "AuthenticationPages" do
   		specify { expect(response).to redirect_to(my_page_path) }
   	end
   end
+
+  describe "authorization" do 
+  	describe "for non-signed-in users" do
+  		let(:user){ FactoryGirl.create(:user) } 
+  		describe "in Users Controller" do 
+
+  			describe "visiting edit user page" do 
+  				before { visit edit_user_path(user) }
+  				it { expect(subject).to have_content('参加者ログイン') }
+  			end
+
+  			describe "submitting to the update action" do 
+  				before { patch user_path(user) }
+  				specify { expect(response).to redirect_to( root_path )}
+  			end
+
+  			describe "when attempting to visit a protected page" do 
+  				before do 
+  					visit edit_user_path(user)
+  					fill_in "メールアドレス", with: user.email
+  					fill_in "パスワード", with: user.password
+  					click_button "ログイン"
+  				end
+  				describe "after signing in" do 
+  					it "render the desired page" do 
+  						expect(subject).to have_title('ユーザ情報編集')
+  					end
+  				end
+  			end
+
+  		end
+  	end
+
+  	describe "wrong user" do 
+  		let(:user) { FactoryGirl.create(:user) }
+  		let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+
+  		before { sign_in user, no_capybara:true }
+
+  		#describe "submitting a GET request to the user#index action" do 
+  		#	before { get my_page_path }
+  		#	specify { expect(response).to redirect_to(root_path) }
+  		#end
+  		describe "submitting a GET request to the user#edit action" do 
+  			before { get edit_user_path(wrong_user) }
+  			specify { expect(response.body).not_to match('ユーザ情報編集') }
+  			specify { expect(response).to redirect_to(root_path) }
+			end
+			describe "submitting a PATCH request to the user#update action" do |variable|
+				before { patch user_path(wrong_user) }
+				specify { expect(response).to redirect_to(root_path) }
+			end
+
+  	end
+  end
+
 end
