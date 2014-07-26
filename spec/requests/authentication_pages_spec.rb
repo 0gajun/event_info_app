@@ -57,6 +57,7 @@ describe "AuthenticationPages" do
   				it { expect(subject).to have_content('参加者ログイン') }
   			end
 
+
   			describe "submitting to the update action" do 
   				before { patch user_path(user) }
   				specify { expect(response).to redirect_to( root_path )}
@@ -82,24 +83,43 @@ describe "AuthenticationPages" do
   	describe "wrong user" do 
   		let(:user) { FactoryGirl.create(:user) }
   		let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+  		describe do
+	  		before { sign_in user, no_capybara: true }
 
-  		before { sign_in user, no_capybara:true }
-
-  		#describe "submitting a GET request to the user#index action" do 
-  		#	before { get my_page_path }
-  		#	specify { expect(response).to redirect_to(root_path) }
-  		#end
-  		describe "submitting a GET request to the user#edit action" do 
-  			before { get edit_user_path(wrong_user) }
-  			specify { expect(response.body).not_to match('ユーザ情報編集') }
-  			specify { expect(response).to redirect_to(root_path) }
+	  		describe "submitting a GET request to the user#index action" do 
+	  			before { get users_path }
+	  			specify { expect(response).to redirect_to(root_path) }
+	  		end
+	  		describe "submitting a GET request to the user#edit action" do 
+	  			before { get edit_user_path(wrong_user) }
+	  			specify { expect(response).to redirect_to(root_path) }
+				end
+				describe "submitting a PATCH request to the user#update action" do |variable|
+					before { patch user_path(wrong_user) }
+					specify { expect(response).to redirect_to(root_path) }
+				end
 			end
-			describe "submitting a PATCH request to the user#update action" do |variable|
-				before { patch user_path(wrong_user) }
-				specify { expect(response).to redirect_to(root_path) }
-			end
+	  end
 
+  	describe "admin user" do
+  		let(:admin) { FactoryGirl.create(:admin) }
+  		let(:user) { FactoryGirl.create(:user, email: "normal@example.com") }
+
+  		before { sign_in admin }
+
+  		describe "visiting users path" do 
+  			before { visit users_path }
+  			it { expect(subject).to have_title('ユーザ一覧') }
+  		end
+  	end
+  	describe "non-admin user" do 
+  		let(:non_admin) { FactoryGirl.create(:user) }
+  		before { sign_in non_admin }
+  		describe "viisting users path" do 
+  			before { visit users_path }
+  			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
+  			it { expect(subject).to have_title(full_title('マイページ')) }
+  		end
   	end
   end
-
 end

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		
+		@users = User.order('id asc')
 	end
 
 	def destroy
@@ -50,14 +50,17 @@ class UsersController < ApplicationController
 		def signed_in_user
 			if !signed_in?
 				store_location
-				flash[:warning] = "ログインしてください"
+				flash.now[:warning] = "ログインしてください"
 				redirect_to root_path
 			end
 		end
 
 		def correct_user
 			@user = User.find(params[:id])
-			redirect_to(root_path) unless current_user?(@user)
+			if !current_user?(@user) && !current_user.admin?
+				flash[:warning] = "権限がありません"
+				redirect_to(root_path)
+			end
 		end
 
 		def admin_user

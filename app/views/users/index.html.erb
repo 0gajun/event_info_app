@@ -1,3 +1,23 @@
 <%# my_page %>
 <% provide(:title, 'ユーザ一覧') %>
-<h2>ユーザ一覧</h2>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<table class="table table-striped">
+			<caption><h2>ユーザ一覧</h2></caption>
+			<thead>
+				<tr>
+					<th>ID</th><th>名前</th><th>団体名</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<th><%= user.id %></th>
+						<th><%= link_to user.name, edit_user_path(user) %></th>
+						<th><%= user.group %></th>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
