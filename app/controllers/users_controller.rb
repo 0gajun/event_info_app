@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: [:index, :destroy]
 
+
 	def new
 		@user = User.new
 	end
@@ -34,7 +35,13 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		@users = User.order('id asc')
+		if user_lists_params[:user_list_target] == 'staff'
+			@users = User.where(staff: true, admin: false).order('id asc')
+			@title = 'スタッフ一覧'
+		else
+			@users = User.where(staff: false, admin: false).order('id asc')
+			@title = 'ユーザ一覧'
+		end
 	end
 
 	def destroy
@@ -45,6 +52,11 @@ class UsersController < ApplicationController
 		def user_params
 			params.require(:user).permit(:name, :email, :group,
 											:password, :password_confirmation)
+		end
+
+		def user_lists_params
+			return Hash[user_list_target: 'user'] unless params[:user_list_target].present?
+			params.permit("user_list_target")
 		end
 
 		def signed_in_user

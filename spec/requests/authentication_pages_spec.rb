@@ -105,18 +105,30 @@ describe "AuthenticationPages" do
   		let(:admin) { FactoryGirl.create(:admin) }
   		let(:user) { FactoryGirl.create(:user, email: "normal@example.com") }
 
-  		before { sign_in admin }
+  		describe "(with capybara)" do 
+	  		before { sign_in admin }
 
-  		describe "visiting users path" do 
-  			before { visit users_path }
-  			it { expect(subject).to have_title('ユーザ一覧') }
-  		end
+	  		describe "visiting users path" do 
+	  			before { visit users_path }
+	  			it { expect(subject).to have_title('ユーザ一覧') }
+	  		end
+	  	end
+	  	describe "(without capybara)" do 
+	  		before { sign_in admin, no_capybara: true }
+
+	  		describe "visiting users path" do 
+	  			it "show normal users" do 
+	  				get users_path, show: 'users'
+	  				expect(subject).to have_title('ユーザ一覧')
+	  			end
+	  		end
+	  	end
   	end
   	describe "non-admin user" do 
   		let(:non_admin) { FactoryGirl.create(:user) }
   		before { sign_in non_admin }
   		describe "viisting users path" do 
-  			before { visit users_path }
+  			before { get users_path, show: 'user' }
   			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
   			it { expect(subject).to have_title(full_title('マイページ')) }
   		end
