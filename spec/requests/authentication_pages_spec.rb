@@ -108,19 +108,15 @@ describe "AuthenticationPages" do
   		describe "(with capybara)" do 
 	  		before { sign_in admin }
 
-	  		describe "visiting users path" do 
-	  			before { visit users_path }
+	  		describe "visiting normal users path" do 
+	  			before { visit users_path(user_list_target: 'user') }
 	  			it { expect(subject).to have_title('ユーザ一覧') }
+	  			it { expect(subject).not_to have_title('スタッフ一覧') }
 	  		end
-	  	end
-	  	describe "(without capybara)" do 
-	  		before { sign_in admin, no_capybara: true }
-
-	  		describe "visiting users path" do 
-	  			it "show normal users" do 
-	  				get users_path, show: 'users'
-	  				expect(subject).to have_title('ユーザ一覧')
-	  			end
+	  		describe "visiting staff users path" do 
+	  			before { visit users_path(user_list_target: 'staff') }
+	  			it { expect(subject).to have_title('スタッフ一覧') }
+	  			it { expect(subject).not_to have_title('ユーザ一覧') }
 	  		end
 	  	end
   	end
@@ -128,7 +124,12 @@ describe "AuthenticationPages" do
   		let(:non_admin) { FactoryGirl.create(:user) }
   		before { sign_in non_admin }
   		describe "viisting users path" do 
-  			before { get users_path, show: 'user' }
+  			before { visit users_path(user_list_target: 'user') }
+  			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
+  			it { expect(subject).to have_title(full_title('マイページ')) }
+  		end
+  		describe "visiting staff path" do 
+  			before { visit users_path(user_list_target: 'staff') }
   			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
   			it { expect(subject).to have_title(full_title('マイページ')) }
   		end
