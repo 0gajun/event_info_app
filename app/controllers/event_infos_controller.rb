@@ -32,7 +32,7 @@ class EventInfosController < ApplicationController
   end
 
   def index
-  	
+  	@eventinfos = EventInfo.all
   end
 
   private

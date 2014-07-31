@@ -1,0 +1,25 @@
+<% provide(:title, "企画情報一覧") %> 
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<table class="table table-striped">
+			<caption><h2>企画情報一覧</h2></caption>
+			<thead>
+				<tr>
+					<th>ID</th><th>企画名</th><th>団体名</th><th>出展者</th><th>担当者</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @eventinfos.each do |event| %>
+					<% user = User.find(event[:userid]) %>
+					<tr>
+						<th><%= event.id %></th>
+						<th><%= link_to event.title, edit_event_info_path(event) %></th>
+						<th><%= user.group %></th>
+						<th><%= link_to user.name, edit_user_path(user)  %></th>
+						<th>-</th>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
