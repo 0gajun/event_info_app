@@ -9,6 +9,13 @@ namespace :db do
 					password: "foobar",
 					password_confirmation: "foobar"
 					)
+		User.create!(name: "スタッフ",
+					email: "staff@example.com",
+					group: "矢上祭実行委員会",
+					staff: true,
+					password: "foobar",
+					password_confirmation: "foobar"
+					)
 		User.create!(name: "岡田けんと",
 					email: "okada@example.com",
 					group: "矢上祭実行委員会",

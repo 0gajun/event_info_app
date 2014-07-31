@@ -32,6 +32,6 @@ class EventInfosController < ApplicationController
   private
   	def eventinfo_params
   		params.require(:event_info).permit(:title, :categoryid, :placeid,
-  											:sub_placeid, :description)
+  											:sub_placeid, :description, :userid)
   	end
 end

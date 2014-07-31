@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EventInfo do
 	before { @event = EventInfo.new(title: 'ガミラジ',
 									placeid: 1,
-									sub_placeid: 1,
+									subplace: "",
 									categoryid: 1,
 									firstday_time: '12:00~',
 									secondday_time: '12:00~',
@@ -16,7 +16,7 @@ describe EventInfo do
 
 	it { expect(subject).to respond_to(:title) }
 	it { expect(subject).to respond_to(:placeid) }
-	it { expect(subject).to respond_to(:sub_placeid) }
+	it { expect(subject).to respond_to(:subplace) }
 	it { expect(subject).to respond_to(:categoryid) }
 	it { expect(subject).to respond_to(:firstday_time) }
 	it { expect(subject).to respond_to(:secondday_time) }
