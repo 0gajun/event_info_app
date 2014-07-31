@@ -199,3 +199,10 @@ ja:
         email: メールアドレス
         group: 団体名
         password: パスワード
+      event_info:
+        title: 企画名
+        description: 説明文
+        userid: ユーザID
+        placeid: 場所
+        sub_placeid: 場所（詳細)
+        categoryid: カテゴリ
