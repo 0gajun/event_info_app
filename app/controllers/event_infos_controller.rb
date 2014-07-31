@@ -1,4 +1,7 @@
 class EventInfosController < ApplicationController
+	before_action :signed_in_user
+  before_action :admin_user, only: [:new, :create]
+
   def new
   	@eventinfo = EventInfo.new
   end

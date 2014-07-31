@@ -57,7 +57,6 @@ describe "AuthenticationPages" do
   				it { expect(subject).to have_content('参加者ログイン') }
   			end
 
-
   			describe "submitting to the update action" do 
   				before { patch user_path(user) }
   				specify { expect(response).to redirect_to( root_path )}
@@ -76,8 +75,15 @@ describe "AuthenticationPages" do
   					end
   				end
   			end
-
   		end
+      describe "in EventInfo Controller" do 
+        describe "visiting event_infos#new" do 
+          before { visit new_event_info_path }
+          it { expect(subject).not_to have_title("企画情報新規登録") }
+          it { expect(subject).not_to have_content("企画情報新規登録") }
+          it { expect(subject).to have_content("参加者ログイン") }
+        end
+      end
   	end
 
   	describe "wrong user" do 
@@ -118,21 +124,44 @@ describe "AuthenticationPages" do
 	  			it { expect(subject).to have_title('スタッフ一覧') }
 	  			it { expect(subject).not_to have_title('ユーザ一覧') }
 	  		end
+        describe "visiting event_infos#new" do 
+          before { visit new_event_info_path }
+          it { expect(subject).to have_title("企画情報新規登録") }
+          it { expect(subject).to have_content("企画情報新規登録") }
+        end
 	  	end
   	end
   	describe "non-admin user" do 
   		let(:non_admin) { FactoryGirl.create(:user) }
-  		before { sign_in non_admin }
-  		describe "viisting users path" do 
-  			before { visit users_path(user_list_target: 'user') }
-  			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
-  			it { expect(subject).to have_title(full_title('マイページ')) }
-  		end
-  		describe "visiting staff path" do 
-  			before { visit users_path(user_list_target: 'staff') }
-  			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
-  			it { expect(subject).to have_title(full_title('マイページ')) }
-  		end
+      describe "(with capybara)" do 
+    		before { sign_in non_admin }
+    		describe "viisting users path" do 
+    			before { visit users_path(user_list_target: 'user') }
+    			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
+    			it { expect(subject).to have_title(full_title('マイページ')) }
+    		end
+    		describe "visiting staff path" do 
+    			before { visit users_path(user_list_target: 'staff') }
+    			it { expect(subject).to have_selector('div.alert.alert-warning', text: "権限がありません") }
+    			it { expect(subject).to have_title(full_title('マイページ')) }
+    		end
+        describe "visiting event_infos#new" do 
+          before { visit new_event_info_path }
+          it { expect(subject).not_to have_title("企画情報新規登録") }
+          it { expect(subject).not_to have_content("企画情報新規登録") }
+          it { expect(subject).to have_title("マイページ") }
+        end
+      end
+      describe "(without capybara)" do 
+        before { sign_in non_admin, no_capybara: true }
+        describe "submitting a POST request to event_infos#create" do 
+          before do 
+            @params = { event_info: FactoryGirl.attributes_for(:event_info) }
+            post event_infos_path, @params
+          end
+          it { expect(response).to redirect_to(root_path) }
+        end
+      end
   	end
   end
 end

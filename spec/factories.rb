@@ -12,4 +12,12 @@ FactoryGirl.define do
 			admin true
 		end
 	end
+	factory :event_info do 
+		title "企画名"
+		categoryid 1
+		placeid 1
+		sub_placeid 1
+		description "かくかくしかじか"
+		userid 1
+	end
 end
