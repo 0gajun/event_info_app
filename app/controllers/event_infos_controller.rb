@@ -20,7 +20,12 @@ class EventInfosController < ApplicationController
   def edit
   end
   def update
-  	
+  	if @eventinfo.update_attributes(eventinfo_params)
+  		flash[:success] = "企画#{@eventinfo.title}が更新されました"
+  		redirect_to edit_event_info_path(@eventinfo)
+  	else
+  		render 'edit'
+  	end
   end
 
   def show

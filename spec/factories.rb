@@ -16,7 +16,7 @@ FactoryGirl.define do
 		title "企画名"
 		categoryid 1
 		placeid 1
-		sub_placeid 1
+		subplace "詳細"
 		description "かくかくしかじか"
 		userid 1
 	end

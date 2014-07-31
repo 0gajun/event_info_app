@@ -22,7 +22,7 @@
 			<%= f.label :userid, class: 'control-label' %>
 			<%= f.collection_select :userid, User.all, :id, :name, prompt: "選択してください", class: 'form-control'%>
 
-			<%= f.submit "作成", class: "btn btn-large btn-primary" %>
+			<%= f.submit "変更を保存", class: "btn btn-large btn-primary" %>
 		<% end %>
 	</div>
 </div>
