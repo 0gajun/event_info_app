@@ -17,3 +17,11 @@ Place.create(name: "ステージ")
 Place.create(name: "グラウンド")
 Place.create(name: "14棟")
 Place.create(name: "模擬店ロード")
+
+User.create!(name:"admin",
+			email:"admin@example.com",
+			group:"矢上祭実行委員会",
+			admin: true,
+			password: "foobar",
+			password_confirmation: "foobar"
+			)
