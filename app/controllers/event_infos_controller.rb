@@ -1,5 +1,6 @@
 class EventInfosController < ApplicationController
 	before_action :signed_in_user
+	before_action :correct_user, only: [:show, :edit, :update]
   before_action :admin_user, only: [:new, :create]
 
   def new
@@ -33,5 +34,12 @@ class EventInfosController < ApplicationController
   	def eventinfo_params
   		params.require(:event_info).permit(:title, :categoryid, :placeid,
   											:sub_placeid, :description, :userid)
+  	end
+
+  	def correct_user
+  		@eventinfo = EventInfo.find(params[:id])
+  		unless @eventinfo.userid == current_user.id || current_user.admin?
+  			redirect_to root_path
+  		end
   	end
 end
