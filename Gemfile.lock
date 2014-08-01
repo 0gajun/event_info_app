@@ -40,6 +40,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     childprocess (0.3.6)
@@ -124,17 +129,6 @@ GEM
     rails-i18n (4.0.2)
       i18n (~> 0.6)
       rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
-      rails (>= 4.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -151,6 +145,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -222,6 +217,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.0.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
+  carrierwave
   childprocess (= 0.3.6)
   coffee-rails (= 4.0.1)
   factory_girl_rails (= 4.2.1)
@@ -237,6 +233,7 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails-i18n
   rails_12factor (= 0.0.2)
+  rmagick
   rspec-rails (= 2.14.0)
   sass-rails (= 4.0.2)
   sdoc (= 0.3.20)

@@ -12,6 +12,8 @@ gem 'faker-japanese'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rails-i18n'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :development, :test do
 	gem 'rspec-rails', '2.14.0'
