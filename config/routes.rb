@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'json/show'
+
   get 'categories/new'
 
   get 'categories/edit'
