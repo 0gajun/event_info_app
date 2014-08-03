@@ -10,7 +10,7 @@ CarrierWave.configure do |config|
   config.cache_dir = "#{Rails.root}/tmp/uploads"
   config.fog_directory  = 'yfes-app-storage-dev' if Rails.env.development?                   # required
   config.fog_directory  = 'yfes-app-storage' if Rails.env.production?                   # required  
-  config.fog_public     = false                                   # optional, defaults to true
-  config.fog_authenticated_url_expiration = 600
+  config.fog_public     = true
+  config.cache_storage = :fog
   #config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
 end
