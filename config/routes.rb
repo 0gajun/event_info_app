@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
+  match '/json/EventTableApi', to: 'json#event_table_api', via: 'get'
   match '/my_page',           to: 'users#show',             via: 'get'
   match '/about',             to: 'static_pages#about',     via: 'get'
   match '/create_user',       to: 'users#new',              via: 'get'
