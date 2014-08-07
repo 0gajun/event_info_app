@@ -1,7 +1,4 @@
 class JsonController < ApplicationController
-  def show
-  end
-
   def event_table_api
   	@event_info = PublicEventInfos.all
   	parse_revision
@@ -9,6 +6,17 @@ class JsonController < ApplicationController
   def description_table_api
   	@event_info = PublicEventInfos.all
   	parse_revision
+  end
+  def category_table_api
+  	@categories = Category.all
+  end
+  def place_table_api
+  	@places = Place.all
+  end
+  def revision_api
+  	@event = CurrentRevisions.find_by(table_name: "event_infos")
+  	@category = CurrentRevisions.find_by(table_name: "categories")
+  	@place = CurrentRevisions.find_by(table_name: "places")
   end
 
   private

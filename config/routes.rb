@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'json/show'
-
-  get 'categories/new'
-
-  get 'categories/edit'
-
-  get 'categories/index'
 
   resources :users, only: [:new, :create, :edit, :update, :index]
   resources :sessions, only: [:new, :create, :destroy]
@@ -13,8 +6,11 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-  match '/json/EventTableApi', to: 'json#event_table_api', via: 'get'
-  match '/json/DescriptionTableApi', to: 'json#description_table_api',  via: 'get'
+  match '/json/EventTableApi',        to: 'json#event_table_api',         via: 'get'
+  match '/json/DescriptionTableApi',  to: 'json#description_table_api',   via: 'get'
+  match '/json/CategoryTableApi',     to: 'json#category_table_api',      via: 'get'
+  match '/json/PlaceTableApi',        to: 'json#place_table_api',         via: 'get'
+  match '/json/RevisionApi',          to: 'json#revision_api',            via: 'get'
   match '/my_page',           to: 'users#show',             via: 'get'
   match '/about',             to: 'static_pages#about',     via: 'get'
   match '/create_user',       to: 'users#new',              via: 'get'
