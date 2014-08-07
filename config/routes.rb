@@ -14,12 +14,15 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   match '/json/EventTableApi', to: 'json#event_table_api', via: 'get'
+  match '/json/DescriptionTableApi', to: 'json#description_table_api',  via: 'get'
   match '/my_page',           to: 'users#show',             via: 'get'
   match '/about',             to: 'static_pages#about',     via: 'get'
   match '/create_user',       to: 'users#new',              via: 'get'
   match '/signout',           to: 'sessions#destroy',       via: 'delete'
   match '/register_eventinfo',to: 'event_infos#new',         via: 'get'
-
+  match '/event_info/approve',to: 'event_infos#approve',    via: 'post'
+  match '/event_info/reject', to: 'event_infos#reject',     via: 'post'
+  match '/event_info/rebuild',to: 'event_infos#rebuild',    via: 'post'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731153902) do
+ActiveRecord::Schema.define(version: 20140807033015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,8 @@ ActiveRecord::Schema.define(version: 20140731153902) do
     t.text     "reject_message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "subplace"
+    t.string   "subplace"
+    t.boolean  "pending_rebuild",  default: true
   end
 
   create_table "places", force: true do |t|
@@ -46,8 +47,31 @@ ActiveRecord::Schema.define(version: 20140731153902) do
     t.datetime "updated_at"
   end
 
+  create_table "public_event_infos", force: true do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.integer  "placeid"
+    t.integer  "categoryid"
+    t.string   "firstday_time"
+    t.string   "secondday_time"
+    t.text     "description"
+    t.string   "image_url"
+    t.string   "movie_url"
+    t.string   "subplace"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "group"
+  end
+
   create_table "subplaces", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "updates_eventinfos", force: true do |t|
+    t.integer  "revision"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

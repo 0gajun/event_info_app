@@ -11,6 +11,13 @@ body {
 	font-family: Verdana, "Hiragino Kaku Gothic ProN", YuGothic, Meiryo, sans-serif;
 }
 
+.admin-info {
+	margin: 15px 0px 15px 0px;
+	padding: 10px;
+	border: 1px $gray-lighter solid;
+	border-radius: 3px;
+}
+
 /* Typography */
 
 p {
@@ -98,6 +105,9 @@ input {
 
 .field_with_errors {
   @extend .has-error;
+}
+.bg-info {
+	background-color:#d9edf7;
 }
 
 

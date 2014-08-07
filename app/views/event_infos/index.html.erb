@@ -6,7 +6,7 @@
 			<caption><h2>企画情報一覧</h2></caption>
 			<thead>
 				<tr>
-					<th>ID</th><th>企画名</th><th>団体名</th><th>出展者</th><th>担当者</th>
+					<th>ID</th><th>企画名</th><th>団体名</th><th>出展者</th><th>担当者</th><th>状態</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -18,9 +18,21 @@
 						<th><%= user.group %></th>
 						<th><%= link_to user.name, edit_user_path(user)  %></th>
 						<th>-</th>
+						<th>
+							<p class="text-warning" >
+								<% if event[:pending_approval] %>
+									承認待ち
+								<% elsif event[:reject_status] %>
+									リジェクト済み
+								<% elsif event[:pending_rebuild] %>
+									再構築待ち
+								<% end %>	
+							</p>
+						</th>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
+		<%= link_to "再構築", event_info_rebuild_path, method: "post", class: "btn btn-success col-md-3 col-md-offset-9" %>
 	</div>
 </div>

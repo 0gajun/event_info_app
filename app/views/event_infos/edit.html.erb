@@ -2,6 +2,19 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<h2>企画情報編集</h2>
+		<% if current_user.admin? %>
+		<div class="admin-info">
+			<% if @eventinfo[:pending_approval] %>
+				<p class="bg-info">この企画は承認待ちです。</p>
+				<%= link_to "承認", event_info_approve_path(id: @eventinfo.id), method: "post", class: "btn btn-primary btn-sm" %>
+				<%= link_to "却下", event_info_reject_path(id: @eventinfo.id), method: "post", class: "btn btn-danger btn-sm" %>
+				<%if !@eventinfo[:reject_message].blank? %>
+					<p>前回のリジェクトメッセージ</p>
+					<p class="admin-info"><%= @eventinfo[:reject_message] %></p>
+				<% end %>		
+			<% end %>	
+		</div>
+		<% end %>
 		<%= form_for(@eventinfo) do |f| %>
 			<%= render 'shared/event_error_messages' %>
 			<%= f.label :title, class: 'control-label' %>
