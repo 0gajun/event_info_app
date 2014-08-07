@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit, :update, :index]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :event_infos, only: [:new ,:create, :edit, :update, :show, :index]
+  resources :event_infos, only: [:new ,:create, :edit, :update, :show, :index, :destroy]
 
   root 'sessions#new'
 

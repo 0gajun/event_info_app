@@ -5,6 +5,13 @@ class PublicEventInfos < ActiveRecord::Base
 	    	if (@public_event = PublicEventInfos.find_by(event_id: event[:id])).nil?
 	      	@public_event = PublicEventInfos.new
 	      	@public_event[:event_id] = event[:id]
+	      	UpdatesEventinfo.new(revision: CurrentRevisions.find_by(table_name: "event_infos")[:revision]+1,
+                          event_id: event[:id],
+                          new_flag: true ).save
+	    	else
+	    		UpdatesEventinfo.new(revision: CurrentRevisions.find_by(table_name: "event_infos")[:revision]+1,
+                          event_id: event[:id],
+                          update_flag: true ).save
 	    	end
 	      @public_event[:title] = event[:title]
 	      @public_event[:placeid] = event[:placeid]

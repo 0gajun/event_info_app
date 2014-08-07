@@ -29,7 +29,7 @@
 			<%= f.text_field :secondday_time, class: "form-control" %>
 
 			<%= f.label :userid, class: 'control-label' %>
-			<%= f.collection_select :userid, User.where(staff: true), :id, :name, prompt: "選択してください", class: 'form-control'%>
+			<%= f.collection_select :userid, User.where(admin: false), :id, :name, prompt: "選択してください", class: 'form-control'%>
 
 			<%= f.submit "作成", class: "btn btn-large btn-primary" %>
 		<% end %>

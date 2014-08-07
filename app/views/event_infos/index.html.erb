@@ -2,6 +2,15 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<%= link_to "新規作成", new_event_info_path, class: "btn btn-primary col-md-3 col-md-offset-9" %>
+		<% if current_user.admin? %>
+			<div class="admin-info">
+				<p>再構築待ち件数</p>
+				<ul>
+					<li>New&Update........<%= count_new_update_waiting_rebuild %></li>
+					<li>Delete............<%= count_delete_waiting_rebuild %></li>
+				</ul>
+			</div>
+		<% end %>
 		<table class="table table-striped">
 			<caption><h2>企画情報一覧</h2></caption>
 			<thead>

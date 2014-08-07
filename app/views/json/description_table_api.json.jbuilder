@@ -6,5 +6,9 @@ json.Description @event_info do |event|
 	json.EventImageUrl "https://yfes-app-storage-dev.s3.amazonaws.com/uploads/event_info/image_url/#{event.event_id}/#{event.image_url}"
 	json.EventMovieUrl event.movie_url
 end
-json.Updates @updates do |update| 
+json.Updates @revisions do |revision|
+	json.Revision revision[0]
+	json.New revision[1][:new]
+	json.Update revision[1][:update]
+	json.Delete revision[1][:delete]
 end

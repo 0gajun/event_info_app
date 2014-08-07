@@ -25,3 +25,7 @@ User.create!(name:"admin",
 			password: "foobar",
 			password_confirmation: "foobar"
 			)
+
+CurrentRevisions.create(table_name: "event_infos", revision: 0)
+CurrentRevisions.create(table_name: "categories", revision: 0)
+CurrentRevisions.create(table_name: "places", revision: 0)
