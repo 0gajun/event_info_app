@@ -22,6 +22,12 @@
 			<%= f.label :description, class: 'control-label' %>
 			<%= f.text_area :description ,class: 'form-control'%>
 
+			<%= f.label :firstday_time, class: "control-label" %>
+			<%= f.text_field :firstday_time, class: "form-control" %>
+
+			<%= f.label :secondday_time, class: "control-label" %>
+			<%= f.text_field :secondday_time, class: "form-control" %>
+
 			<%= f.label :userid, class: 'control-label' %>
 			<%= f.collection_select :userid, User.where(staff: true), :id, :name, prompt: "選択してください", class: 'form-control'%>
 

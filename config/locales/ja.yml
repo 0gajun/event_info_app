@@ -203,6 +203,9 @@ ja:
       event_info:
         title: 企画名
         description: 説明文
+        firstday_time: 1日目の時間
+        secondday_time: 2日目の時間
+        image_url: 企画画像
         userid: 担当者
         placeid: 場所
         subplace: 場所(詳細)

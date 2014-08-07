@@ -6,4 +6,5 @@ class EventInfo < ActiveRecord::Base
 	validates(:categoryid, presence: true)
 	validates(:description, presence: true, length: { maximum: 500 })
 	validates(:userid, presence: true)
+	validates(:image_url, presence: true)
 end
