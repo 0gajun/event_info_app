@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
 
+  get 'places/new'
+
+  get 'places/create'
+
+  get 'places/edit'
+
+  get 'places/update'
+
+  get 'places/index'
+
   resources :users, only: [:new, :create, :edit, :update, :index]
   resources :sessions, only: [:new, :create, :destroy]
   resources :event_infos, only: [:new ,:create, :edit, :update, :show, :index, :destroy]
+  resources :places, only:[:new, :create, :edit, :update, :index, :destroy]
+  resources :categories, only:[:new, :create, :edit, :update, :index, :destroy]
 
   root 'sessions#new'
 

@@ -1,0 +1,22 @@
+<% provide(:title, "場所") %> 
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= link_to "新規作成", new_place_path, class: "btn btn-primary col-md-3 col-md-offset-9" %>
+		<table class="table table-striped">
+			<caption><h2>場所一覧</h2></caption>
+			<thead>
+				<tr>
+					<th>ID</th><th>場所</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @places.each do |place| %>
+					<tr>
+						<th><%= place.id %></th>
+						<th><%= link_to place.name, edit_place_path(place) %></th>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
