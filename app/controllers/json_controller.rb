@@ -5,6 +5,7 @@ class JsonController < ApplicationController
   end
   def description_table_api
   	@event_info = PublicEventInfos.all
+    @host = (Rails.env.production?) ? "yfes-app-storage.s3.amazonaws.com" : "yfes-app-storage-dev.s3.amazonaws.com"
   	parse_revision
   end
   def category_table_api
