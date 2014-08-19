@@ -27,6 +27,9 @@
 			<%= f.label :categoryid, class: "control-label"%>
 			<%= f.collection_select :categoryid, Category.all, :id, :name , prompt: "選択してください", class: "form-control"%>
 
+			<%= f.label :pickup, class: "control-label" %>
+			<%= f.check_box :pickup, class: "form-control" %>
+
 			<%= f.label :placeid, class: "control-label"%>
 			<%= f.collection_select :placeid, Place.all, :id, :name , prompt: "選択してください", class: "form-control"%>
 

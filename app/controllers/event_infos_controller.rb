@@ -84,8 +84,17 @@ class EventInfosController < ApplicationController
   private
   	def eventinfo_params
   		params.require(:event_info).permit(:title, :categoryid, :placeid,
+<<<<<<< Updated upstream
   											:subplace, :description, :userid, :image_url, 
                         :firstday_time, :secondday_time)
+=======
+<<<<<<< Updated upstream
+  											:subplace, :description, :userid, :image_url)
+=======
+  											:subplace, :description, :userid, :image_url, 
+                        :firstday_time, :secondday_time, :pickup)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   	end
 
   	def correct_user
